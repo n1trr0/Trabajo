@@ -53,9 +53,9 @@ public class Enemies extends MovingObject{
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics graphics) {
 
-        Graphics2D g2d = (Graphics2D)g;
+        Graphics2D g2d = (Graphics2D)graphics;
 
         affineTransform = AffineTransform.getTranslateInstance(position.getX(), position.getY());
 
