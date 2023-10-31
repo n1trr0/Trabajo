@@ -18,6 +18,7 @@ public class GameState {
         enemies = 1;
         startWave();
     }
+    //esta sin acabar pq ocurre el bug de que desaparecen balas
     public void divideEnemies(Enemies enemies){
         Size size = enemies.getSize();
 
@@ -51,6 +52,7 @@ public class GameState {
             ));
         }
     }
+
     private void startWave(){
         double x, y;
 
