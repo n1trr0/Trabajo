@@ -18,39 +18,7 @@ public class GameState {
         enemies = 1;
         startWave();
     }
-    public void divideEnemies(Enemies enemies){
-        Size size = enemies.getSize();
-
-        BufferedImage[] textures = size.textures;
-
-        Size newSize = null;
-
-        switch (size){
-            case BIG :
-                newSize = Size.MED;
-                break;
-            case MED:
-                newSize = Size.SMALL;
-                break;
-            case SMALL:
-                newSize = Size.TINY;
-                break;
-            default:
-                return;
-        }
-
-        for(int i = 0; i < size.quantity; i++){
-            movingObjects.add(new Enemies(
-                    enemies.getPosition(),
-                    new Vector2D(0, 1).setDirection(Math.random()*Math.PI*2),
-                    Constants.ENEMIES_VELOCITY*Math.random() + 1,
-                    textures[(int)(Math.random()*assets.bigs.length)],
-                    this,
-                    newSize,
-                    player
-            ));
-        }
-    }
+    
     private void startWave(){
         double x, y;
 
