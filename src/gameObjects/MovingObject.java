@@ -45,6 +45,7 @@ public abstract class MovingObject extends GameObject{
             return;
         }
         if(!(a instanceof Enemies && b instanceof Enemies)){
+            //HighScore += 100; provisional se cambiara
             a.destroy();
             b.destroy();
         }
