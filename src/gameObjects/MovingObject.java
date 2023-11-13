@@ -94,6 +94,15 @@ public abstract class MovingObject extends GameObject{
      * @param b Segundo objecto
      */
     private void objectCollision(MovingObject a, MovingObject b){
+        if(a instanceof Player && ((Player)a).isSpawing()){
+            return;
+        }
+        if(b instanceof Player && ((Player)b).isSpawing()){
+            return;
+        }
+        if((a instanceof Laser) && (b instanceof Laser)){
+            return;
+        }
         if((a instanceof Player || b instanceof Player)&&(a instanceof Laser || b instanceof Laser)){
             return;
         }

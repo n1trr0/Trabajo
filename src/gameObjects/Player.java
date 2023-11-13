@@ -31,6 +31,8 @@ public class Player extends MovingObject {
      * @param fireRate
      */
     private Chronometer fireRate;
+    private boolean spawing,visible;
+    private Chronometer spawntime,flickertime;
 
     /**
      * Crea un jugador a partir del super de MovingObject y de heading, acceleration & fireRate
@@ -46,6 +48,8 @@ public class Player extends MovingObject {
         heading = new Vector2D(0, 1);
         acceleration = new Vector2D();
         fireRate = new Chronometer();
+        spawntime=new Chronometer();
+        flickertime=new Chronometer();
     }
 
     /**
@@ -53,9 +57,19 @@ public class Player extends MovingObject {
      */
     @Override
     public void update() {
-        if (Keyboard.SHOOT && !fireRate.isRunning()) {
+        if(!spawntime.isRunning()){
+            spawing=false;
+            visible=true;
+        }
+        if(spawing){
+            if(!flickertime.isRunning()){
+                flickertime.run(Constants.FLICKER_TIME);
+                visible=!visible;
+            }
+        }
+        if (Keyboard.SHOOT && !fireRate.isRunning() && !spawing) {
             gameState.getMovingObjects().add(0, new Laser(
-                    getCenter().add(heading.scale(width / 3)),
+                    getCenter().add(heading.scale(width/3)),
                     heading,
                     Constants.LASER_VELOCITY,
                     angle,
@@ -97,15 +111,34 @@ public class Player extends MovingObject {
         }*/
 
         fireRate.update();
+        spawntime.update();
+        flickertime.update();
         collidesWith();
     }
+    @Override
+    public void destroy(){
+        spawing=true;
+        spawntime.run(Constants.SPAWNING_TIME);
+        resetValues();
+        gameState.loseLive();
+    }
+    public boolean isSpawing(){return spawing;}
 
+    private void resetValues(){
+        angle=0;
+        velocity=new Vector2D();
+        position=new Vector2D(Constants.WIDTH/2-assets.player.getWidth()/2,
+                Constants.HEIGHT/2-assets.player.getHeight()/2);
+    }
     /**
      * Dibuja los graficos por pantalla
      * @param graphics
      */
     @Override
     public void draw(Graphics graphics) {
+        if(!visible){
+            return;
+        }
 
         Graphics2D graphics2D = (Graphics2D) graphics;
 

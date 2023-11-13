@@ -25,7 +25,7 @@ public class Constants {
      * Cadencia de disparo
      * @param FIRE_RATE
      */
-    public static final int FIRE_RATE = 100;
+    public static final int FIRE_RATE = 200;
     /**
      * Velocidad de los disparos
      * @param LASER_VELOCITY
@@ -45,5 +45,7 @@ public class Constants {
     public static final int RULER_SCORE = 40;
     public static final int ENEMIES_SCORE = 20;
     public static final double GOLD = 0.25;
+    public static final long SPAWNING_TIME=3000;
+    public static final long FLICKER_TIME=200;
 
 }

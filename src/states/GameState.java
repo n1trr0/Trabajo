@@ -22,6 +22,12 @@ public class GameState {
         enemies = 1;
         startWave();
     }
+    public void loseLive(){
+        lives--;
+        if(lives==0){
+            System. exit(0);
+        }
+    }
 
     public void addScore(int value){
         score += value;
