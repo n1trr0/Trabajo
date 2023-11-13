@@ -9,11 +9,37 @@ import input.Keyboard;
 import math.Vector2D;
 import states.GameState;
 
+/**
+ * Implementa al jugador
+ * @author Raul Garcia & Alejandro Molero
+ */
+
 public class Player extends MovingObject {
 
+    /**
+     * Hacia donde se dirige el jugador
+     * @param heading
+     */
     private Vector2D heading;
+    /**
+     * Aceleraccion del jugador
+     * @param acceleration
+     */
     private Vector2D acceleration;
+    /**
+     * Cadencia de disparo del jugador
+     * @param fireRate
+     */
     private Chronometer fireRate;
+
+    /**
+     * Crea un jugador a partir del super de MovingObject y de heading, acceleration & fireRate
+     * @param position Posicion del objecto
+     * @param velocity Velocidad del objecto
+     * @param maxVelocity Velocidad maxima del objecto
+     * @param texture Imagen del objecto
+     * @param gameState Estado del juego
+     */
 
     public Player(Vector2D position, Vector2D velocity, double maxVelocity, BufferedImage texture, GameState gameState) {
         super(position, velocity, maxVelocity, texture, gameState);
@@ -22,6 +48,9 @@ public class Player extends MovingObject {
         fireRate = new Chronometer();
     }
 
+    /**
+     * Actualiza el jugador comprobando si se ha movido o a disparado
+     */
     @Override
     public void update() {
         if (Keyboard.SHOOT && !fireRate.isRunning()) {
@@ -71,6 +100,10 @@ public class Player extends MovingObject {
         collidesWith();
     }
 
+    /**
+     * Dibuja los graficos por pantalla
+     * @param graphics
+     */
     @Override
     public void draw(Graphics graphics) {
 

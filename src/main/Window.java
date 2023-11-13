@@ -75,7 +75,7 @@ public class Window extends JFrame implements Runnable{
 
         assets.init();
         gameState = new GameState();
-    }
+    } 
 
     @Override
     public void run(){                                              //For class "window" to be runnable must implement void run()

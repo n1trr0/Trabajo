@@ -7,14 +7,57 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * MovingObject extiende a GameObject y se usa para todos los objectos que se muevan
+ * @author Raul Garcia & Alejandro Molero
+ *
+ */
+
 public abstract class MovingObject extends GameObject{
+    /**
+     * Velocidad del objecto
+     * @param velocity
+     */
     protected Vector2D velocity;
+    /**
+     * Modifica la imagen (rotar)
+     * @param affineTransform
+     */
     protected AffineTransform affineTransform;
+    /**
+     * Angulo de la imagen
+     * @param angle
+     */
     protected double angle;
+    /**
+     * Velocidad maxima del objecto
+     * @param maxVelocity
+     */
     protected double maxVelocity;
+    /**
+     * Ancho de la imagen
+     * @param width
+     */
     protected int width;
+    /**
+     * Alto de la imagen
+     * @param height
+     */
     protected int height;
+    /**
+     * Estado del juego
+     * @param gameState
+     */
     protected GameState gameState;
+
+    /**
+     * Crea un objecto a partir del super de GameObject y de los nuevos parametros
+     * @param position Posicion del objecto
+     * @param velocity Velocidad del objecto
+     * @param maxVelocity Velocidad maxima del objecto
+     * @param texture Imagen del objecto
+     * @param gameState Estado actual del juego
+     */
     public MovingObject(Vector2D position,Vector2D velocity,double maxVelocity, BufferedImage texture, GameState gameState) {
         super(position, texture);
         this.velocity = velocity;
@@ -24,6 +67,10 @@ public abstract class MovingObject extends GameObject{
         height = texture.getHeight();
         angle = 0;
     }
+
+    /**
+     * Comprueba las colisiones entre los diferentes objectos
+     */
     protected void collidesWith(){
         ArrayList<MovingObject> movingObjects = gameState.getMovingObjects();
 
@@ -40,19 +87,33 @@ public abstract class MovingObject extends GameObject{
             }
         }
     }
+
+    /**
+     * Se activa cuando dos objectos colisionan y determina si deben ser eleminados
+     * @param a Primer objecto
+     * @param b Segundo objecto
+     */
     private void objectCollision(MovingObject a, MovingObject b){
         if((a instanceof Player || b instanceof Player)&&(a instanceof Laser || b instanceof Laser)){
             return;
         }
         if(!(a instanceof Enemies && b instanceof Enemies)){
-            //HighScore += 100; provisional se cambiara
             a.destroy();
             b.destroy();
         }
     }
+
+    /**
+     * Destruye el objecto actual
+     */
     protected void destroy(){
         gameState.getMovingObjects().remove(this);
     }
+
+    /**
+     * Calcula el centro de la imagen
+     * @return Devuelve el centro de la imagen
+     */
     protected Vector2D getCenter() {
         return new Vector2D(position.getX() + width / 2, position.getY() + height / 2);
     }

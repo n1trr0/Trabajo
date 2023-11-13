@@ -51,7 +51,12 @@ public class Enemies extends MovingObject{
         //angle += Math.PI/40;
 
     }
-
+    @Override
+    public void destroy(){
+        //gameState.divideEnemies(this);
+        gameState.addScore(Constants.ENEMIES_SCORE);
+        super.destroy();
+    }
     @Override
     public void draw(Graphics graphics) {
 
