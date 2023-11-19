@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * Carga las imagenes para las texturas de los objetos
+ *
  * @author Raul Garcia & Alejandro Molero
  */
 
@@ -21,7 +22,7 @@ public class assets {
     /**
      * Numero maximo de carga de objetos
      */
-    public static float maxCount = 29;
+    public static float maxCount = 30;
     /**
      * Imagen del jugador
      * @param player Imagen del jugador
@@ -72,6 +73,11 @@ public class assets {
      */
     public static Font fontMed;
     /**
+     * Musica de fondo del menu
+     */
+    public static Clip menuMusic;
+    public static BufferedImage menuBackground;
+    /**
      * Carga las imagenes/fuentes/sonidos/animaciones desde el directorio indicado
      */
     public static void init(){
@@ -83,6 +89,8 @@ public class assets {
         playOut = loadImage("/ui/playOut.png");
         salirIn = loadImage("/ui/SalirIn.png");
         salirOut = loadImage("/ui/SalirOut.png");
+
+        menuBackground = loadImage("/menuBkg/menuBackground0.png");
 
         for(int i = 0; i < bigs.length; i++)
             bigs[i] = loadImage("/characters/enemies/big"+(i+1)+".png");
@@ -97,6 +105,8 @@ public class assets {
             tinies[i] = loadImage("/characters/enemies/tiny"+(i+1)+".png");
         for(int i = 0; i < numbers.length; i++)
             numbers[i] = loadImage("/hud/"+i+".png");
+
+        menuMusic = loadSound("/sound/menuMusic.wav");
 
         fontWave = loadFont("/fonts/future.ttf",42);
         fontMed = loadFont("/fonts/future.ttf",20);

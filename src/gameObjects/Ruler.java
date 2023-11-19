@@ -91,7 +91,7 @@ public class Ruler extends MovingObject{
 
             toPlayer = toPlayer.setDirection(currentAngle);
 
-            Laser laser = new Laser(
+            LaserEnemy laser = new LaserEnemy(
                     getCenter().add(toPlayer.scale(width)),
                     toPlayer,
                     Constants.LASER_VELOCITY,

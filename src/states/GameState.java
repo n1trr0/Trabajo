@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class GameState extends State{
+    public static final Vector2D PLAYER_START_POSITION = new Vector2D(Constants.WIDTH/2 - assets.player.getWidth()/2,
+            Constants.HEIGHT/2 - assets.player.getHeight()/2);
     private Player player;
     private ArrayList<MovingObject> movingObjects = new ArrayList<MovingObject>();
     private ArrayList<Message> messages = new ArrayList<Message>();
@@ -19,8 +21,12 @@ public class GameState extends State{
     private int gold = 0;
     private int waves = 1;
     private Chronometer rulerSpawner;
+    private Chronometer gameOverTimer;
+    private boolean gameOver;
     public GameState() {
-        player = new Player(new Vector2D(600, 600), new Vector2D(), 5, assets.player, this);
+        player = new Player(PLAYER_START_POSITION, new Vector2D(), 5, assets.player, this);
+        gameOverTimer = new Chronometer();
+        gameOver = false;
         movingObjects.add(player);
         enemies = 1;
         startWave();
@@ -147,11 +153,17 @@ public class GameState extends State{
                 i--;
             }
         }
+        if(gameOver && !gameOverTimer.isRunning()) {
+            State.changeState(new MenuState());
+        }
         if(!rulerSpawner.isRunning()) {
             rulerSpawner.run(Constants.RULER_SPAWN_RATE);
             spawnRuler();
         }
+
+        gameOverTimer.update();
         rulerSpawner.update();
+
         for (int i = 0; i < movingObjects.size(); i++)
             if (movingObjects.get(i) instanceof Enemies)
                 return;
@@ -233,8 +245,18 @@ public class GameState extends State{
         }
 
     }
-    public void gameOver(){
+    public void gameOver() {
+        Message gameOverMsg = new Message(
+                PLAYER_START_POSITION,
+                true,
+                "GAME OVER",
+                Color.WHITE,
+                true,
+                assets.fontMed);
 
+        this.messages.add(gameOverMsg);
+        gameOverTimer.run(Constants.GAME_OVER_TIME);
+        gameOver = true;
     }
     public ArrayList<MovingObject> getMovingObjects() {
         return movingObjects;

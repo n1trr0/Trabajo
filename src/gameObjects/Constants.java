@@ -75,6 +75,10 @@ public class Constants {
      */
     public static final long FLICKER_TIME=200;
     /**
+     * Tiempo de espera tras morir
+     */
+    public static final long GAME_OVER_TIME = 3000;
+    /**
      * String que aparece en los botones (en este caso el string viene implementado en la imagen)
      */
     public static final String PLAY = null;

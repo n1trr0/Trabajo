@@ -64,8 +64,6 @@ public class Enemies extends MovingObject{
 
         affineTransform = AffineTransform.getTranslateInstance(position.getX(), position.getY());
 
-        //affineTransform.rotate(angle, width/2, height/2);
-
         g2d.drawImage(texture, affineTransform, null);
     }
 
