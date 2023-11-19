@@ -23,9 +23,15 @@ public class Sound {
     }
 
     /**
-     * Activa el sonido desde el principio en modo bucle
+     * Activa el sonido en modo bucle
      */
     public void loop(){
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+    /**
+     * Activa el sonido desde el principio en modo bucle
+     */
+    public void loopInicio(){
         clip.setFramePosition(0);
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }

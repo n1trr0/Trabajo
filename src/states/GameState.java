@@ -3,10 +3,14 @@ package states;
 import gameObjects.*;
 import graphics.Text;
 import graphics.assets;
+import io.JsonParser;
+import io.ScoreData;
 import math.Vector2D;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GameState extends State{
@@ -18,21 +22,26 @@ public class GameState extends State{
     private int enemies;
     private int score = 0;
     private int lives = 3;
-    private int gold = 0;
     private int waves = 1;
     private Chronometer rulerSpawner;
+    private Chronometer waveSpawner;
     private Chronometer gameOverTimer;
     private boolean gameOver;
+    private BufferedImage backgroundImage;
     public GameState() {
         player = new Player(PLAYER_START_POSITION, new Vector2D(), 5, assets.player, this);
         gameOverTimer = new Chronometer();
         gameOver = false;
         movingObjects.add(player);
         enemies = 1;
-        startWave();
+        backgroundImage = assets.gameBackground;
 
         rulerSpawner = new Chronometer();
+        waveSpawner = new Chronometer();
         rulerSpawner.run(Constants.RULER_SPAWN_RATE);
+        waveSpawner.run(Constants.WAVE_SPAWN_RATE);
+
+        startWave();
     }
     public boolean loseLive(){
         lives--;
@@ -85,32 +94,13 @@ public class GameState extends State{
         double x = rand == 0 ? (Math.random()*Constants.WIDTH): 0;
         double y = rand == 0 ? 0 : (Math.random()*Constants.HEIGHT);
 
-        ArrayList<Vector2D> path = new ArrayList<Vector2D>();
 
-        double posX, posY;
-
-        posX = Math.random()*Constants.WIDTH/2;
-        posY = Math.random()*Constants.HEIGHT/2;
-        path.add(new Vector2D(posX, posY));
-
-        posX = Math.random()*(Constants.WIDTH/2) + Constants.WIDTH/2;
-        posY = Math.random()*Constants.HEIGHT/2;
-        path.add(new Vector2D(posX, posY));
-
-        posX = Math.random()*Constants.WIDTH/2;
-        posY = Math.random()*(Constants.HEIGHT/2) + Constants.HEIGHT/2;
-        path.add(new Vector2D(posX, posY));
-
-        posX = Math.random()*(Constants.WIDTH/2) + Constants.WIDTH/2;
-        posY = Math.random()*(Constants.HEIGHT/2) + Constants.HEIGHT/2;
-        path.add(new Vector2D(posX, posY));
 
         movingObjects.add(new Ruler(
                 new Vector2D(x, y),
                 new Vector2D(),
                 Constants.RULER_MAX_VELOCITY,
                 assets.ruler,
-                path,
                 this
         ));
 
@@ -154,27 +144,39 @@ public class GameState extends State{
             }
         }
         if(gameOver && !gameOverTimer.isRunning()) {
+            try {
+                ArrayList<ScoreData> dataList = JsonParser.readFile();
+                dataList.add(new ScoreData(score));
+                JsonParser.writeFile(dataList);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             State.changeState(new MenuState());
         }
         if(!rulerSpawner.isRunning()) {
             rulerSpawner.run(Constants.RULER_SPAWN_RATE);
             spawnRuler();
         }
+        if(!waveSpawner.isRunning()) {
+            waveSpawner.run(Constants.WAVE_SPAWN_RATE);
+            startWave();
+        }
 
         gameOverTimer.update();
         rulerSpawner.update();
+        waveSpawner.update();
 
         for (int i = 0; i < movingObjects.size(); i++)
             if (movingObjects.get(i) instanceof Enemies)
                 return;
 
-        startWave();
     }
 
     public void draw(Graphics graphics) {
         Graphics2D graphics2D = (Graphics2D) graphics;
         graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        for (int i = 0; i < movingObjects.size(); i++) {
+        graphics2D.drawImage(backgroundImage, 0, 0, Constants.WIDTH, Constants.HEIGHT, null);
+        for(int i = 0; i < movingObjects.size(); i++) {
             movingObjects.get(i).draw(graphics);
         }
         for (int i = 0; i < messages.size(); i++) {
@@ -185,33 +187,19 @@ public class GameState extends State{
         }
         drawScore(graphics);
         drawLives(graphics);
-        drawGold(graphics);
+
+        graphics2D.dispose();
     }
 
     private void drawScore(Graphics g) {
 
-        Vector2D pos = new Vector2D(Constants.WIDTH* 0.95, 25);
+        Vector2D pos = new Vector2D(85, 75);
 
         String scoreToString = Integer.toString(score);
 
         for(int i = 0; i < scoreToString.length(); i++) {
 
             g.drawImage(assets.numbers[Integer.parseInt(scoreToString.substring(i, i + 1))],
-                    (int)pos.getX(), (int)pos.getY(), null);
-            pos.setX(pos.getX() + 20);
-
-        }
-    }
-    private void drawGold(Graphics g) {
-
-        Vector2D pos = new Vector2D(85, 75);
-
-        gold = (int) (score*Constants.GOLD);
-        String goldToString = Integer.toString(gold);
-
-        for(int i = 0; i < goldToString.length(); i++) {
-
-            g.drawImage(assets.numbers[Integer.parseInt(goldToString.substring(i, i + 1))],
                     (int)pos.getX(), (int)pos.getY(), null);
             pos.setX(pos.getX() + 20);
 

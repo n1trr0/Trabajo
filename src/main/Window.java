@@ -15,7 +15,6 @@ import states.State;
 import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.sql.SQLOutput;
 
 public class Window extends JFrame implements Runnable {
     private Canvas canvas;
@@ -87,7 +86,6 @@ public class Window extends JFrame implements Runnable {
 
         graphics.setColor(Color.white);
         //graphics.drawString(""+averageFPS, 0, 30);
-        Text.drawText(graphics,"FPS " + averageFPS, new Vector2D(0, 15), false, Color.white, assets.fontMed);
         //------------------------------------
         graphics.dispose();
         bufferStrategy.show();

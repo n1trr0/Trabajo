@@ -8,7 +8,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 /**
- * Implementa los disparos de los enemigos
+ * Implementa los disparos del jugador
  * @author Raul Garcia & Alejandro Molero
  */
 public class LaserEnemy extends MovingObject{

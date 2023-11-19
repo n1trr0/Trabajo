@@ -22,15 +22,13 @@ public class assets {
     /**
      * Numero maximo de carga de objetos
      */
-    public static float maxCount = 30;
+    public static float maxCount = 36;
     /**
      * Imagen del jugador
-     * @param player Imagen del jugador
      */
     public static BufferedImage player;
     /**
      * Imagen de los disparos
-     * @param fireball Imagen de los disparos
      */
     public static BufferedImage fireball;
     public static BufferedImage[] numbers = new BufferedImage[11];
@@ -41,7 +39,6 @@ public class assets {
     public static BufferedImage[] tinies = new BufferedImage[2];
     /**
      * Imagen de los enemigos de clase ruler
-     * @param ruler Imagen de los enemigos de clase ruler
      */
     public static BufferedImage ruler;
     /**
@@ -65,6 +62,30 @@ public class assets {
      */
     public static BufferedImage salirOut;
     /**
+     * Imagen del boton opciones cuando el raton esta encima
+     */
+    public static BufferedImage opcionesIn;
+    /**
+     * Imagen del boton opciones por defecto
+     */
+    public static BufferedImage opcionesOut;
+    /**
+     * Imagen del boton volver cuando el raton esta encima
+     */
+    public static BufferedImage volverIn;
+    /**
+     * Imagen del boton volver por defecto
+     */
+    public static BufferedImage volverOut;
+    /**
+     * Imagen del boton score cuando el raton esta encima
+     */
+    public static BufferedImage scoreIn;
+    /**
+     * Imagen del boton score por defecto
+     */
+    public static BufferedImage scoreOut;
+    /**
      * Fuente de que aparece al principio de cada oleada
      */
     public static Font fontWave;
@@ -76,7 +97,14 @@ public class assets {
      * Musica de fondo del menu
      */
     public static Clip menuMusic;
+    /**
+     * Imagen de fondo del menu
+     */
     public static BufferedImage menuBackground;
+    /**
+     * Imagen de fondo dentro de la partida
+     */
+    public static BufferedImage gameBackground;
     /**
      * Carga las imagenes/fuentes/sonidos/animaciones desde el directorio indicado
      */
@@ -85,12 +113,20 @@ public class assets {
         fireball = loadImage("/projectiles/fireball.png");
         ruler = loadImage("/characters/enemies/ruler.png");
         vida = loadImage("/hud/mask.png");
+
         playIn = loadImage("/ui/playIn.png");
         playOut = loadImage("/ui/playOut.png");
         salirIn = loadImage("/ui/SalirIn.png");
         salirOut = loadImage("/ui/SalirOut.png");
+        opcionesIn = loadImage("/ui/optionsIn.png");
+        opcionesOut = loadImage("/ui/optionsOut.png");
+        volverIn = loadImage("/ui/volverIn.png");
+        volverOut = loadImage("/ui/volverOut.png");
+        scoreIn = loadImage("/ui/scoreIn.png");
+        scoreOut = loadImage("/ui/scoreOut.png");
 
         menuBackground = loadImage("/menuBkg/menuBackground0.png");
+        gameBackground = loadImage("/bkg.png");
 
         for(int i = 0; i < bigs.length; i++)
             bigs[i] = loadImage("/characters/enemies/big"+(i+1)+".png");
@@ -117,7 +153,7 @@ public class assets {
     /**
      * Metodo que carga la imaganes
      * @param path Ruta del archivo
-     * @return
+     * @return Devuelve la imagen
      */
     public static BufferedImage loadImage(String path){
         count++;
@@ -128,7 +164,7 @@ public class assets {
      * Metodo que carga las fuentes
      * @param path Ruta del archivo
      * @param size Escala de la fuente
-     * @return
+     * @return Devuelve la fuente
      */
     public static Font loadFont(String path, int size){
         count++;
@@ -138,7 +174,7 @@ public class assets {
     /**
      * Metodo que carga los sonidos
      * @param path Ruta del archivo
-     * @return
+     * @return Devuelve el sonido
      */
     public static Clip loadSound(String path){
         count++;

@@ -1,5 +1,7 @@
 package gameObjects;
 
+import javax.swing.filechooser.FileSystemView;
+
 /**
  * Contiene todas los parametros constantes del juego
  * @author Raul Garcia & Alejandro Molero
@@ -55,6 +57,10 @@ public class Constants {
      */
     public static long RULER_SPAWN_RATE = 5000;
     /**
+     * Tiempo entre el siguiente spawn de la clase ruler (5 segundos)
+     */
+    public static long WAVE_SPAWN_RATE = 10000;
+    /**
      * Puntacion obtenida al matar un enemigo de clase ruler
      */
     public static final int RULER_SCORE = 40;
@@ -62,10 +68,6 @@ public class Constants {
      * Puntacion obtenida al matar un enemigo base
      */
     public static final int ENEMIES_SCORE = 20;
-    /**
-     * Escala en la que se reparte oro con respecto al score (1:4)
-     */
-    public static final double GOLD = 0.25;
     /**
      * Tiempo de spawn del jugador cuando pierde una vida
      */
@@ -90,4 +92,11 @@ public class Constants {
      * Alto de la barra de carga
      */
     public static final int LOADING_BAR_HEIGHT = 50;
+    public static final String SCORE = "SCORE";
+    public static final String DATE = "DATE";
+    /**
+     * Ruta donde se guardara el json
+     */
+    public static final String SCORE_PATH = FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+
+            "\\UntilDawn\\data.json";
 }

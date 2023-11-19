@@ -23,7 +23,6 @@ public class Enemies extends MovingObject{
 
     @Override
     public void update() {
-        //position = position.add(velocity);
 
         double dx = player.getPosition().getX() - position.getX();
         double dy = player.getPosition().getY() - position.getY();

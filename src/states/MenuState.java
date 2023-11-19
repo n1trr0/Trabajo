@@ -5,10 +5,7 @@ import UI.Button;
 import gameObjects.Constants;
 import graphics.Sound;
 import graphics.assets;
-
-import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -21,19 +18,38 @@ public class MenuState extends State{
 
         buttons.add(new Button(assets.playOut, assets.playIn,
                 Constants.WIDTH / 2 - assets.playOut.getWidth() / 2,
-                Constants.HEIGHT / 2 - assets.playOut.getHeight() / 2,
+                Constants.HEIGHT / 2,
                 Constants.PLAY,
                 new Action() {
                     @Override
                     public void doAction() {
-                        State.changeState(new GameState());
                         backgroundMusic.stop();
-
+                        State.changeState(new GameState());
+                    }
+                }));
+        buttons.add(new Button(assets.opcionesOut, assets.opcionesIn,
+                Constants.WIDTH / 2 - assets.opcionesOut.getWidth() / 2,
+                Constants.HEIGHT / 2 + 100,
+                Constants.PLAY,
+                new Action() {
+                    @Override
+                    public void doAction() {
+                        State.changeState(new OptionsState());
+                    }
+                }));
+        buttons.add(new Button(assets.scoreOut, assets.scoreIn,
+                Constants.WIDTH / 2 - assets.scoreOut.getWidth() / 2,
+                Constants.HEIGHT / 2 + 200,
+                Constants.PLAY,
+                new Action() {
+                    @Override
+                    public void doAction() {
+                        State.changeState(new ScoreState());
                     }
                 }));
         buttons.add(new Button(assets.salirOut, assets.salirIn,
                 Constants.WIDTH / 2 - assets.salirOut.getWidth() / 2,
-                Constants.HEIGHT / 2 + assets.salirOut.getHeight() ,
+                Constants.HEIGHT / 2 + 300 ,
                 Constants.PLAY,
                 new Action() {
                     @Override
