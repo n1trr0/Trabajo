@@ -54,7 +54,7 @@ public class Enemies extends MovingObject{
     @Override
     public void destroy(){
         //gameState.divideEnemies(this);
-        gameState.addScore(Constants.ENEMIES_SCORE);
+        gameState.addScore(Constants.ENEMIES_SCORE, position);
         super.destroy();
     }
     @Override

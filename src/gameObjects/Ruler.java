@@ -113,7 +113,7 @@ public class Ruler extends MovingObject{
     }
     @Override
     public void destroy(){
-        gameState.addScore(Constants.RULER_SCORE);
+        gameState.addScore(Constants.RULER_SCORE, position);
         super.destroy();
     }
     @Override

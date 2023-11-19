@@ -49,6 +49,11 @@ public abstract class MovingObject extends GameObject{
      * @param gameState
      */
     protected GameState gameState;
+    /**
+     * Indica si el objeto fue destruido
+     * @param dead
+     */
+    protected boolean dead;
 
     /**
      * Crea un objecto a partir del super de GameObject y de los nuevos parametros
@@ -82,7 +87,7 @@ public abstract class MovingObject extends GameObject{
             }
             double distance = m.getCenter().substract(getCenter()).getMagnitude();
 
-            if(distance < m.width/2 + width/2 && movingObjects.contains(this)){
+            if(distance < m.width/2 + width/2 && movingObjects.contains(this) && !m.dead && !dead){
                 objectCollision(m,this);
             }
         }
@@ -113,12 +118,19 @@ public abstract class MovingObject extends GameObject{
     }
 
     /**
-     * Destruye el objecto actual
+     * Marca el objeto como destruido
      */
     protected void destroy(){
-        gameState.getMovingObjects().remove(this);
+        dead = true;
     }
 
+    /**
+     * Devuelve si el objeto esta marcado para destruirse
+     * @return
+     */
+    public boolean isDead(){
+        return dead;
+    }
     /**
      * Calcula el centro de la imagen
      * @return Devuelve el centro de la imagen

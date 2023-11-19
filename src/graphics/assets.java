@@ -1,5 +1,7 @@
 package graphics;
 
+import javax.sound.sampled.Clip;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -8,6 +10,18 @@ import java.awt.image.BufferedImage;
  */
 
 public class assets {
+    /**
+     * Indica si todos los recursos fueron cargados
+     */
+    public static boolean loaded = false;
+    /**
+     * Porcentaje por el que va la carga de objetos
+     */
+    public static float count = 0;
+    /**
+     * Numero maximo de carga de objetos
+     */
+    public static float maxCount = 29;
     /**
      * Imagen del jugador
      * @param player Imagen del jugador
@@ -29,29 +43,95 @@ public class assets {
      * @param ruler Imagen de los enemigos de clase ruler
      */
     public static BufferedImage ruler;
-    public static BufferedImage vida;
-
     /**
-     * Carga las imagenes desde el directorio indicado
+     * Imagen de las vidas del jugador
+     */
+    public static BufferedImage vida;
+    /**
+     * Imagen del boton jugar cuando el raton esta encima
+     */
+    public static BufferedImage playIn;
+    /**
+     * Imagen del boton jugar por defecto
+     */
+    public static BufferedImage playOut;
+    /**
+     * Imagen del boton salir cuando el raton esta encima
+     */
+    public static BufferedImage salirIn;
+    /**
+     * Imagen del boton salir por defecto
+     */
+    public static BufferedImage salirOut;
+    /**
+     * Fuente de que aparece al principio de cada oleada
+     */
+    public static Font fontWave;
+    /**
+     * Fuente estandar del juego
+     */
+    public static Font fontMed;
+    /**
+     * Carga las imagenes/fuentes/sonidos/animaciones desde el directorio indicado
      */
     public static void init(){
-        player = loader.imageLoader("/characters/nocturne.png");
-        fireball = loader.imageLoader("/projectiles/fireball.png");
-        ruler = loader.imageLoader("/characters/enemies/ruler.png");
-        vida = loader.imageLoader("/hud/mask.png");
+        player = loadImage("/characters/nocturne.png");
+        fireball = loadImage("/projectiles/fireball.png");
+        ruler = loadImage("/characters/enemies/ruler.png");
+        vida = loadImage("/hud/mask.png");
+        playIn = loadImage("/ui/playIn.png");
+        playOut = loadImage("/ui/playOut.png");
+        salirIn = loadImage("/ui/SalirIn.png");
+        salirOut = loadImage("/ui/SalirOut.png");
 
         for(int i = 0; i < bigs.length; i++)
-            bigs[i] = loader.imageLoader("/characters/enemies/big"+(i+1)+".png");
+            bigs[i] = loadImage("/characters/enemies/big"+(i+1)+".png");
 
         for(int i = 0; i < meds.length; i++)
-            meds[i] = loader.imageLoader("/characters/enemies/med"+(i+1)+".png");
+            meds[i] = loadImage("/characters/enemies/med"+(i+1)+".png");
 
         for(int i = 0; i < smalls.length; i++)
-            smalls[i] = loader.imageLoader("/characters/enemies/small"+(i+1)+".png");
+            smalls[i] = loadImage("/characters/enemies/small"+(i+1)+".png");
 
         for(int i = 0; i < tinies.length; i++)
-            tinies[i] = loader.imageLoader("/characters/enemies/tiny"+(i+1)+".png");
+            tinies[i] = loadImage("/characters/enemies/tiny"+(i+1)+".png");
         for(int i = 0; i < numbers.length; i++)
-            numbers[i] = loader.imageLoader("/hud/"+i+".png");
+            numbers[i] = loadImage("/hud/"+i+".png");
+
+        fontWave = loadFont("/fonts/future.ttf",42);
+        fontMed = loadFont("/fonts/future.ttf",20);
+
+        loaded = true;
+    }
+
+    /**
+     * Metodo que carga la imaganes
+     * @param path Ruta del archivo
+     * @return
+     */
+    public static BufferedImage loadImage(String path){
+        count++;
+        return  loader.imageLoader(path);
+    }
+
+    /**
+     * Metodo que carga las fuentes
+     * @param path Ruta del archivo
+     * @param size Escala de la fuente
+     * @return
+     */
+    public static Font loadFont(String path, int size){
+        count++;
+        return loader.loadFont(path, size);
+    }
+
+    /**
+     * Metodo que carga los sonidos
+     * @param path Ruta del archivo
+     * @return
+     */
+    public static Clip loadSound(String path){
+        count++;
+        return loader.loadSound(path);
     }
 }

@@ -98,7 +98,7 @@ public class Player extends MovingObject {
 
         //pasar de un lado a otro pantalla
         /*if(position.getX() > 1920){
-            position.setX(0);
+            position.setX(Constants.WIDTH);
         }
         if(position.getY() > 1080){
             position.setY(0);
@@ -119,8 +119,11 @@ public class Player extends MovingObject {
     public void destroy(){
         spawing=true;
         spawntime.run(Constants.SPAWNING_TIME);
+        if(!gameState.loseLive()){
+            gameState.gameOver();
+            super.destroy();
+        }
         resetValues();
-        gameState.loseLive();
     }
     public boolean isSpawing(){return spawing;}
 
