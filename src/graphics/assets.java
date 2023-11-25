@@ -159,8 +159,8 @@ public class assets {
 
         menuMusic = loadSound("/sound/menuMusic.wav");
 
-        fontWave = loadFont("/fonts/future.ttf",42);
-        fontMed = loadFont("/fonts/future.ttf",20);
+        fontWave = loadFont("/fonts/TrajanProBold.ttf",42);
+        fontMed = loadFont("/fonts/TrajanProBold.ttf",20);
 
         loaded = true;
     }

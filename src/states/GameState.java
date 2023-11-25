@@ -149,7 +149,7 @@ public class GameState extends State{
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            State.changeState(new GameOverState());
+            State.changeState(new GameOverState(score));
         }
         if(!rulerSpawner.isRunning()) {
             rulerSpawner.run(Constants.RULER_SPAWN_RATE);

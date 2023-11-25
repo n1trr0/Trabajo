@@ -20,6 +20,11 @@ public class Text {
      * @param font Fuente del texto
      */
     public static void drawText(Graphics graphics, String text, Vector2D pos, boolean center, Color color, Font font){
+        Graphics2D graphics2D = (Graphics2D) graphics;
+        graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        graphics2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
         graphics.setColor(color);
         graphics.setFont(font);
         Vector2D position = new Vector2D(pos.getX(), pos.getY());

@@ -8,12 +8,26 @@ import math.Vector2D;
 
 import java.awt.*;
 
+/**
+ * Implementa un menu que carga todos los objetos del programa antes de que este haga algo mas
+ * @author Raul Garcia & Alejandro Molero
+ */
 public class LoadingState extends State{
+    /**
+     * Hilo que se encarga del menu de carga
+     */
     private Thread loadingThread;
+    /**
+     * Inicializa el hilo
+     * @param loadingThread
+     */
     public LoadingState(Thread loadingThread){
         this.loadingThread = loadingThread;
         this.loadingThread.start();
     }
+    /**
+     * Comprueba si los assets se han cargado para cambiar al estado menu
+     */
     @Override
     public void update() {
         if(assets.loaded){
@@ -25,7 +39,10 @@ public class LoadingState extends State{
             }
         }
     }
-
+    /**
+     * Dibuja los objetos en cuestion
+     * @param graphics
+     */
     @Override
     public void draw(Graphics graphics) {
         GradientPaint gradientPaint = new GradientPaint(
