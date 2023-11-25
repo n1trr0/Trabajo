@@ -3,7 +3,7 @@ package gameObjects;
 import javax.swing.filechooser.FileSystemView;
 
 /**
- * Contiene todas los parametros constantes del juego
+ * Contiene todos los parametros constantes del juego
  * @author Raul Garcia & Alejandro Molero
  */
 
@@ -77,11 +77,7 @@ public class Constants {
      */
     public static final long FLICKER_TIME=200;
     /**
-     * Tiempo de espera tras morir
-     */
-    public static final long GAME_OVER_TIME = 3000;
-    /**
-     * String que aparece en los botones (en este caso el string viene implementado en la imagen)
+     * String que aparece en los botones (en este caso el string viene "implementado" en la imagen)
      */
     public static final String PLAY = null;
     /**
@@ -92,8 +88,6 @@ public class Constants {
      * Alto de la barra de carga
      */
     public static final int LOADING_BAR_HEIGHT = 50;
-    public static final String SCORE = "SCORE";
-    public static final String DATE = "DATE";
     /**
      * Ruta donde se guardara el json
      */

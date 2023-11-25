@@ -18,20 +18,23 @@ public class Player extends MovingObject {
 
     /**
      * Hacia donde se dirige el jugador
-     * @param heading
      */
     private Vector2D heading;
     /**
      * Aceleraccion del jugador
-     * @param acceleration
      */
     private Vector2D acceleration;
     /**
      * Cadencia de disparo del jugador
-     * @param fireRate
      */
     private Chronometer fireRate;
+    /**
+     * Determina si esta spawneando y si debe ser visble (para la animacion de parpadeo cuando spawneas)
+     */
     private boolean spawing,visible;
+    /**
+     * Determina el tiempo del spawn y el de la animacion (cambiar entre visible/no visble)
+     */
     private Chronometer spawntime,flickertime;
 
     /**
@@ -53,7 +56,7 @@ public class Player extends MovingObject {
     }
 
     /**
-     * Actualiza el jugador comprobando si se ha movido o a disparado
+     * Actualiza el jugador comprobando si se ha movido o a disparado, o si esta spawneando
      */
     @Override
     public void update() {
@@ -61,12 +64,16 @@ public class Player extends MovingObject {
             spawing=false;
             visible=true;
         }
+
+        //Animacion de cuando spawneas
         if(spawing){
             if(!flickertime.isRunning()){
                 flickertime.run(Constants.FLICKER_TIME);
                 visible=!visible;
             }
         }
+
+        //Dispara si presionas la tecla correspondiente, el disparo no esta en tiempo de espera y no esta spawneando
         if (Keyboard.SHOOT && !fireRate.isRunning() && !spawing) {
             gameState.getMovingObjects().add(0, new Laser(
                     getCenter().add(heading.scale(width/3)),
@@ -79,6 +86,7 @@ public class Player extends MovingObject {
             fireRate.run(Constants.FIRE_RATE);
         }
 
+        //Comprueba y cambia si es necesario la posicion de jugador en funcion de las teclas presionadas
         if (Keyboard.RIGHT)
             angle += Math.PI / 40;
         if (Keyboard.LEFT)
@@ -96,25 +104,26 @@ public class Player extends MovingObject {
         heading = heading.setDirection(angle - Math.PI / 2);
         position = position.add(velocity);
 
-        //pasar de un lado a otro pantalla
-        /*if(position.getX() > 1920){
+        //Comprueba que no se salga de la pantalla
+        if(position.getX() > Constants.WIDTH)
+            position.setX(-width);
+        if(position.getY() > Constants.HEIGHT)
+            position.setY(-height);
+        if(position.getX() < -width)
             position.setX(Constants.WIDTH);
-        }
-        if(position.getY() > 1080){
-            position.setY(0);
-        }
-        if(position.getX() < 0){
-            position.setX(1920);
-        }
-        if(position.getY() < 0){
-            position.setY(1080);
-        }*/
+        if(position.getY() < -height)
+            position.setY(Constants.HEIGHT);
 
+        //Actualiza los cronometros y mira las colisiones
         fireRate.update();
         spawntime.update();
         flickertime.update();
         collidesWith();
     }
+
+    /**
+     * Si te quedan vidas respawneas, si no llama a gameOver
+     */
     @Override
     public void destroy(){
         spawing=true;
@@ -125,8 +134,16 @@ public class Player extends MovingObject {
         }
         resetValues();
     }
+
+    /**
+     * Devuelve in boolean que determina si el jugador esta respawneando
+     * @return
+     */
     public boolean isSpawing(){return spawing;}
 
+    /**
+     * Resetea los valores de direccion del jugador para cuando este respawnea
+     */
     private void resetValues(){
         angle=0;
         velocity=new Vector2D();
@@ -150,7 +167,5 @@ public class Player extends MovingObject {
         affineTransform.rotate(angle, width / 2, height / 2);
 
         graphics2D.drawImage(texture, affineTransform, null);
-
-
     }
 }

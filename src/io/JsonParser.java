@@ -40,7 +40,7 @@ public class JsonParser {
     }
 
     /**
-     * Escribe el archivo data.json
+     * Escribe un archivo
      * @param dataList Lista de arrays de ScoreData que se va escribir en el archivo
      * @throws IOException
      */

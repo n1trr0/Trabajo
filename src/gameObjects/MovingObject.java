@@ -10,9 +10,7 @@ import java.util.ArrayList;
 /**
  * MovingObject extiende a GameObject y se usa para todos los objectos que se muevan
  * @author Raul Garcia & Alejandro Molero
- *
  */
-
 public abstract class MovingObject extends GameObject{
     /**
      * Velocidad del objecto

@@ -9,11 +9,31 @@ import graphics.assets;
 import math.Vector2D;
 import states.GameState;
 
-public class Enemies extends MovingObject{
+/**
+ * Implementa los enemigos basicos del juego
+ * @author Raul Garcia & Alejandro Molero
+ */
 
+public class Enemies extends MovingObject{
+    /**Contiene los diferentes tamaños del enemigo
+     * @param size
+     */
     private Size size;
+    /**Se usa para calcular la trayectoria a seguir a partir de la posicion del jugador
+     * @param player
+     */
     private Player player;
 
+    /**
+     * Constructor unico para crear un enemigo
+     * @param position Posicion
+     * @param velocity Velocidad
+     * @param maxVel Velocidad maxima
+     * @param texture Imagen del enemigo
+     * @param gameState Estado actual del juego
+     * @param size Diferentes tamaños que adopta el enemigo
+     * @param player El jugador actual
+     */
     public Enemies(Vector2D position, Vector2D velocity, double maxVel, BufferedImage texture, GameState gameState, Size size, Player player) {
         super(position, velocity, maxVel, texture, gameState);
         this.size = size;
@@ -21,6 +41,9 @@ public class Enemies extends MovingObject{
         this.velocity = velocity.scale(maxVel);
     }
 
+    /**
+     * Calcula la trayectoria hacia el jugador y comprueba que no se salga de la pantalla
+     */
     @Override
     public void update() {
 
@@ -47,15 +70,22 @@ public class Enemies extends MovingObject{
         if(position.getY() < -height)
             position.setY(Constants.HEIGHT);
 
-        //angle += Math.PI/40;
-
     }
+
+    /**
+     * Destruye el enemigo para dividirlo en uno mas pequeño, te otorga la puntacion correspondiente
+     */
     @Override
     public void destroy(){
         //gameState.divideEnemies(this);
         gameState.addScore(Constants.ENEMIES_SCORE, position);
         super.destroy();
     }
+
+    /**
+     * Dibuja al enemigo en la posicion actualizada
+     * @param graphics
+     */
     @Override
     public void draw(Graphics graphics) {
 
@@ -65,10 +95,11 @@ public class Enemies extends MovingObject{
 
         g2d.drawImage(texture, affineTransform, null);
     }
-
+    /**
+     * getter del parametro Size size
+     * @return
+     */
     public Size getSize(){
         return size;
     }
-
-
 }

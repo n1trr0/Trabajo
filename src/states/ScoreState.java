@@ -26,6 +26,7 @@ public class ScoreState extends State {
     private Comparator<ScoreData>scoreComparator;
     private ScoreData[]auxArray;
     private BufferedImage backgroundImage;
+    private BufferedImage scoreImage, dateImage;
     public ScoreState(){
         returnButton=new Button(
                 assets.volverOut,
@@ -59,6 +60,8 @@ public class ScoreState extends State {
             throw new RuntimeException(e);
         }
         backgroundImage = assets.menuBackground;
+        scoreImage = assets.score;
+        dateImage = assets.date;
     }
     @Override
     public void update() {
@@ -73,18 +76,22 @@ public class ScoreState extends State {
         returnButton.draw(graphics);
         auxArray=highScores.toArray(new ScoreData[highScores.size()]);
         Arrays.sort(auxArray,scoreComparator);
-        Vector2D scorePos = new Vector2D(Constants.WIDTH/2-200,100);
-        Vector2D datePos= new Vector2D(Constants.WIDTH/2+200,100);
-        Text.drawText(graphics,Constants.SCORE,scorePos,true,Color.BLUE,assets.fontMed);
-        Text.drawText(graphics,Constants.DATE,datePos,true,Color.BLUE,assets.fontMed);
+
+        Vector2D scorePos = new Vector2D((int) (Constants.WIDTH/2- scoreImage.getWidth()*1.5 + scoreImage.getWidth()/2),75+ scoreImage.getHeight());
+        Vector2D datePos= new Vector2D(Constants.WIDTH/2+ dateImage.getWidth(),75+ dateImage.getHeight());
+
+        graphics2D.drawImage(scoreImage, (int) (Constants.WIDTH/2- scoreImage.getWidth()*1.5), 75, null);
+        graphics2D.drawImage(dateImage, Constants.WIDTH/2+ dateImage.getWidth()/2, 75, null);
+        //Text.drawText(graphics,Constants.SCORE,scorePos,true,Color.BLUE,assets.fontMed);
+        //Text.drawText(graphics,Constants.DATE,datePos,true,Color.BLUE,assets.fontMed);
         scorePos.setY(scorePos.getY()+40);
         datePos.setY(datePos.getY() + 40);
         for(int i = auxArray.length - 1; i > -1; i--) {
 
-            ScoreData d = auxArray[i];
+            ScoreData data = auxArray[i];
 
-            Text.drawText(graphics, Integer.toString(d.getScore()), scorePos, true, Color.WHITE, assets.fontMed);
-            Text.drawText(graphics, d.getDate(), datePos, true, Color.WHITE, assets.fontMed);
+            Text.drawText(graphics, Integer.toString(data.getScore()), scorePos, true, Color.WHITE, assets.fontMed);
+            Text.drawText(graphics, data.getDate(), datePos, true, Color.WHITE, assets.fontMed);
 
             scorePos.setY(scorePos.getY() + 40);
             datePos.setY(datePos.getY() + 40);

@@ -54,7 +54,6 @@ public class Sound {
      * @return Posicion del frame actual
      */
     public int getFramePos(){return clip.getFramePosition();}
-
     /**
      * Cambia el volumen
      */

@@ -22,7 +22,7 @@ public class assets {
     /**
      * Numero maximo de carga de objetos
      */
-    public static float maxCount = 36;
+    public static float maxCount = 41;
     /**
      * Imagen del jugador
      */
@@ -31,6 +31,10 @@ public class assets {
      * Imagen de los disparos
      */
     public static BufferedImage fireball;
+    /**
+     * Imagen de los disparos enemigos
+     */
+    public static BufferedImage fireballToxic;
     public static BufferedImage[] numbers = new BufferedImage[11];
     //enemies
     public static BufferedImage[] bigs = new BufferedImage[2];
@@ -86,6 +90,14 @@ public class assets {
      */
     public static BufferedImage scoreOut;
     /**
+     * Imagen del score en las tablas de puntuacion
+     */
+    public static BufferedImage score;
+    /**
+     * Imagen de la fecha en las tablas de puntuacion
+     */
+    public static BufferedImage date;
+    /**
      * Fuente de que aparece al principio de cada oleada
      */
     public static Font fontWave;
@@ -111,6 +123,7 @@ public class assets {
     public static void init(){
         player = loadImage("/characters/nocturne.png");
         fireball = loadImage("/projectiles/fireball.png");
+        fireballToxic = loadImage("/projectiles/fireballToxic.png");
         ruler = loadImage("/characters/enemies/ruler.png");
         vida = loadImage("/hud/mask.png");
 
@@ -124,6 +137,8 @@ public class assets {
         volverOut = loadImage("/ui/volverOut.png");
         scoreIn = loadImage("/ui/scoreIn.png");
         scoreOut = loadImage("/ui/scoreOut.png");
+        score = loadImage("/ui/score.png");
+        date = loadImage("/ui/date.png");
 
         menuBackground = loadImage("/menuBkg/menuBackground0.png");
         gameBackground = loadImage("/bkg.png");

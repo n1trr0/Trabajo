@@ -20,10 +20,8 @@ public class Window extends JFrame implements Runnable {
     private Canvas canvas;
     private Thread thread;
     private boolean running = false;
-
     private BufferStrategy bufferStrategy;
     private Graphics graphics;
-
     private final int FPS = 60;                                    //Frames per second
     private double targetTime = 1000000000 / FPS;                     //Nanoseconds
     private double delta = 0;
@@ -84,7 +82,7 @@ public class Window extends JFrame implements Runnable {
 
         State.getCurrentState().draw(graphics);
 
-        graphics.setColor(Color.white);
+        //graphics.setColor(Color.white);
         //graphics.drawString(""+averageFPS, 0, 30);
         //------------------------------------
         graphics.dispose();

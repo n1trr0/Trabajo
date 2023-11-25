@@ -56,7 +56,7 @@ public class Ruler extends MovingObject {
                     toPlayer,
                     Constants.LASER_VELOCITY,
                     currentAngle + Math.PI / 2,
-                    assets.fireball,
+                    assets.fireballToxic,
                     gameState
             );
             gameState.getMovingObjects().add(0, laser);
@@ -77,7 +77,7 @@ public class Ruler extends MovingObject {
     }
 
     /**
-     * Dibuja todo por pantalla
+     * Dibuja el objeto por pantalla
      * @param graphics
      */
     @Override

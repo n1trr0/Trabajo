@@ -25,12 +25,10 @@ public class GameState extends State{
     private int waves = 1;
     private Chronometer rulerSpawner;
     private Chronometer waveSpawner;
-    private Chronometer gameOverTimer;
     private boolean gameOver;
     private BufferedImage backgroundImage;
     public GameState() {
         player = new Player(PLAYER_START_POSITION, new Vector2D(), 5, assets.player, this);
-        gameOverTimer = new Chronometer();
         gameOver = false;
         movingObjects.add(player);
         enemies = 1;
@@ -143,7 +141,7 @@ public class GameState extends State{
                 i--;
             }
         }
-        if(gameOver && !gameOverTimer.isRunning()) {
+        if(gameOver) {
             try {
                 ArrayList<ScoreData> dataList = JsonParser.readFile();
                 dataList.add(new ScoreData(score));
@@ -151,7 +149,7 @@ public class GameState extends State{
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            State.changeState(new MenuState());
+            State.changeState(new GameOverState());
         }
         if(!rulerSpawner.isRunning()) {
             rulerSpawner.run(Constants.RULER_SPAWN_RATE);
@@ -162,7 +160,6 @@ public class GameState extends State{
             startWave();
         }
 
-        gameOverTimer.update();
         rulerSpawner.update();
         waveSpawner.update();
 
@@ -234,16 +231,6 @@ public class GameState extends State{
 
     }
     public void gameOver() {
-        Message gameOverMsg = new Message(
-                PLAYER_START_POSITION,
-                true,
-                "GAME OVER",
-                Color.WHITE,
-                true,
-                assets.fontMed);
-
-        this.messages.add(gameOverMsg);
-        gameOverTimer.run(Constants.GAME_OVER_TIME);
         gameOver = true;
     }
     public ArrayList<MovingObject> getMovingObjects() {

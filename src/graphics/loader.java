@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * Se encarga de la carga de imagenes/fuentes
+ * Se encarga de la carga de imagenes/fuentes/sonidos...
  */
 
 public class loader {
@@ -41,6 +41,12 @@ public class loader {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Carga los sonidos
+     * @param path Directo del sonido
+     * @return Sonido cargado
+     */
     public static Clip loadSound(String path){
         try {
             Clip clip = AudioSystem.getClip();

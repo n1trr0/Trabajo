@@ -29,7 +29,6 @@ public abstract class GameObject {
      * @param position Posicion del objecto
      * @param texture  Imagen del objecto
      */
-
     public GameObject(Vector2D position,BufferedImage texture){
         this.position= position;
         this.texture= texture;

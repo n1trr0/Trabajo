@@ -1,5 +1,9 @@
 package math;
 
+/**
+ * Implementa una clase se comporta como un vector 2D para calcular las posiciones de los objetos
+ * @author Raul Garcia & Alejandro Molero
+ */
 public class Vector2D {
     private double x,y;
     public  Vector2D(double x,double y){
