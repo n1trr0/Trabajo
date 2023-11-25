@@ -13,11 +13,12 @@ public class MenuState extends State{
     private ArrayList<Button> buttons;
     private Sound backgroundMusic;
     private BufferedImage backgroundImage;
+    private BufferedImage titleImage;
     public MenuState(){
         buttons = new ArrayList<Button>();
 
         buttons.add(new Button(assets.playOut, assets.playIn,
-                Constants.WIDTH / 2 - assets.playOut.getWidth() / 2,
+                (Constants.WIDTH - assets.playOut.getWidth()) / 2,
                 Constants.HEIGHT / 2,
                 Constants.PLAY,
                 new Action() {
@@ -28,7 +29,7 @@ public class MenuState extends State{
                     }
                 }));
         buttons.add(new Button(assets.opcionesOut, assets.opcionesIn,
-                Constants.WIDTH / 2 - assets.opcionesOut.getWidth() / 2,
+                (Constants.WIDTH - assets.opcionesOut.getWidth()) / 2,
                 Constants.HEIGHT / 2 + 100,
                 Constants.PLAY,
                 new Action() {
@@ -38,7 +39,7 @@ public class MenuState extends State{
                     }
                 }));
         buttons.add(new Button(assets.scoreOut, assets.scoreIn,
-                Constants.WIDTH / 2 - assets.scoreOut.getWidth() / 2,
+                (Constants.WIDTH - assets.scoreOut.getWidth()) / 2,
                 Constants.HEIGHT / 2 + 200,
                 Constants.PLAY,
                 new Action() {
@@ -48,7 +49,7 @@ public class MenuState extends State{
                     }
                 }));
         buttons.add(new Button(assets.salirOut, assets.salirIn,
-                Constants.WIDTH / 2 - assets.salirOut.getWidth() / 2,
+                (Constants.WIDTH - assets.salirOut.getWidth()) / 2,
                 Constants.HEIGHT / 2 + 300 ,
                 Constants.PLAY,
                 new Action() {
@@ -60,6 +61,7 @@ public class MenuState extends State{
         backgroundMusic = new Sound(assets.menuMusic);
         backgroundMusic.loop();
         backgroundImage = assets.menuBackground;
+        titleImage = assets.titleImage;
     }
     @Override
     public void update() {
@@ -74,6 +76,8 @@ public class MenuState extends State{
         graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 
         graphics2D.drawImage(backgroundImage, 0, 0, Constants.WIDTH, Constants.HEIGHT, null);
+        graphics2D.drawImage(titleImage, (Constants.WIDTH - titleImage.getWidth()) / 2, 0, null);
+
 
         for(Button b:buttons){
             b.draw(graphics);

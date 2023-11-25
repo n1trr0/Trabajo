@@ -1,8 +1,11 @@
 package states;
 
+import UI.Action;
+import UI.Button;
 import gameObjects.*;
 import graphics.Text;
 import graphics.assets;
+import input.Keyboard;
 import io.JsonParser;
 import io.ScoreData;
 import math.Vector2D;
@@ -27,6 +30,7 @@ public class GameState extends State{
     private Chronometer waveSpawner;
     private boolean gameOver;
     private BufferedImage backgroundImage;
+    private Button returnButton;
     public GameState() {
         player = new Player(PLAYER_START_POSITION, new Vector2D(), 5, assets.player, this);
         gameOver = false;
@@ -38,6 +42,20 @@ public class GameState extends State{
         waveSpawner = new Chronometer();
         rulerSpawner.run(Constants.RULER_SPAWN_RATE);
         waveSpawner.run(Constants.WAVE_SPAWN_RATE);
+
+        returnButton=new Button(
+                assets.volverOut,
+                assets.volverIn,
+                assets.volverOut.getHeight(),
+                Constants.HEIGHT - assets.volverOut.getHeight()*2,
+                Constants.PLAY,
+                new Action(){
+                    @Override
+                    public void doAction() {
+                        State.changeState(new MenuState());
+                    }
+                }
+        );
 
         startWave();
     }
@@ -133,41 +151,47 @@ public class GameState extends State{
     }
 
     public void update() {
-        for (int i = 0; i < movingObjects.size(); i++) {
-            MovingObject mo = movingObjects.get(i);
-            mo.update();
-            if(mo.isDead()){
-                movingObjects.remove(i);
-                i--;
+        if(!Keyboard.PAUSE){
+            for (int i = 0; i < movingObjects.size(); i++) {
+                MovingObject mo = movingObjects.get(i);
+                mo.update();
+                if(mo.isDead()){
+                    movingObjects.remove(i);
+                    i--;
+                }
             }
-        }
-        if(gameOver) {
-            try {
-                ArrayList<ScoreData> dataList = JsonParser.readFile();
-                dataList.add(new ScoreData(score));
-                JsonParser.writeFile(dataList);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if(gameOver) {
+                try {
+                    ArrayList<ScoreData> dataList = JsonParser.readFile();
+                    dataList.add(new ScoreData(score));
+                    JsonParser.writeFile(dataList);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                State.changeState(new GameOverState(score));
             }
-            State.changeState(new GameOverState(score));
+            if(!rulerSpawner.isRunning()) {
+                rulerSpawner.run(Constants.RULER_SPAWN_RATE);
+                spawnRuler();
+            }
+            if(!waveSpawner.isRunning()) {
+                waveSpawner.run(Constants.WAVE_SPAWN_RATE);
+                startWave();
+            }
+
+            rulerSpawner.update();
+            waveSpawner.update();
+
+            for (int i = 0; i < movingObjects.size(); i++)
+                if (movingObjects.get(i) instanceof Enemies)
+                    return;
         }
-        if(!rulerSpawner.isRunning()) {
-            rulerSpawner.run(Constants.RULER_SPAWN_RATE);
-            spawnRuler();
-        }
-        if(!waveSpawner.isRunning()) {
-            waveSpawner.run(Constants.WAVE_SPAWN_RATE);
-            startWave();
+        else{
+            returnButton.update();
         }
 
-        rulerSpawner.update();
-        waveSpawner.update();
+        }
 
-        for (int i = 0; i < movingObjects.size(); i++)
-            if (movingObjects.get(i) instanceof Enemies)
-                return;
-
-    }
 
     public void draw(Graphics graphics) {
         Graphics2D graphics2D = (Graphics2D) graphics;
@@ -184,6 +208,10 @@ public class GameState extends State{
         }
         drawScore(graphics);
         drawLives(graphics);
+
+        if(Keyboard.PAUSE){
+            returnButton.draw(graphics);
+        }
 
         graphics2D.dispose();
     }

@@ -20,17 +20,19 @@ public class Keyboard implements KeyListener {
      * @param LEFT tecla A
      * @param RIGHT tecla S
      * @param SHOOT tecla SPACE
+     * @param PAUSE tecla ESCAPE
      */
-    public static boolean UP, LEFT, RIGHT, SHOOT;
+    public static boolean UP, LEFT, RIGHT, SHOOT, PAUSE;
 
     /**
-     * Inicializa todos los parametros en false
+     * Inicializa todos los parametros en falso
      */
     public Keyboard(){
         UP = false;
         LEFT = false;
         RIGHT = false;
         SHOOT = false;
+        PAUSE = false;
     }
 
     /**
@@ -41,6 +43,7 @@ public class Keyboard implements KeyListener {
         RIGHT = keys[KeyEvent.VK_D];
         LEFT = keys[KeyEvent.VK_A];
         SHOOT = keys[KeyEvent.VK_SPACE];
+        PAUSE = keys[KeyEvent.VK_ESCAPE];
     }
 
     /**
@@ -56,7 +59,21 @@ public class Keyboard implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        keys[e.getKeyCode()] = true;
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            if (!keys[e.getKeyCode()]) {
+                keys[e.getKeyCode()] = true;
+                // Realiza acciones específicas cuando se presiona la tecla Escape
+                System.out.println("Tecla Escape presionada");
+            } else {
+                keys[e.getKeyCode()] = false;
+                // Realiza acciones específicas cuando se libera la tecla Escape
+                System.out.println("Tecla Escape liberada");
+            }
+        }
+        else{
+            keys[e.getKeyCode()] = true;
+        }
+
     }
 
     /**
@@ -65,6 +82,9 @@ public class Keyboard implements KeyListener {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-        keys[e.getKeyCode()] = false;
+        if(e.getKeyCode() != KeyEvent.VK_ESCAPE){
+            keys[e.getKeyCode()] = false;
+        }
+
     }
 }

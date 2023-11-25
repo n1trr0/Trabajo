@@ -22,7 +22,7 @@ public class assets {
     /**
      * Numero maximo de carga de objetos
      */
-    public static float maxCount = 41;
+    public static float maxCount = 42;
     /**
      * Imagen del jugador
      */
@@ -118,6 +118,10 @@ public class assets {
      */
     public static BufferedImage gameBackground;
     /**
+     * Imagen del nombre del menu principal
+     */
+    public static BufferedImage titleImage;
+    /**
      * Carga las imagenes/fuentes/sonidos/animaciones desde el directorio indicado
      */
     public static void init(){
@@ -139,6 +143,7 @@ public class assets {
         scoreOut = loadImage("/ui/scoreOut.png");
         score = loadImage("/ui/score.png");
         date = loadImage("/ui/date.png");
+        titleImage = loadImage("/ui/UntilDawn.png");
 
         menuBackground = loadImage("/menuBkg/menuBackground0.png");
         gameBackground = loadImage("/bkg.png");

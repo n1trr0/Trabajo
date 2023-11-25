@@ -10,39 +10,28 @@ import javax.swing.filechooser.FileSystemView;
 public class Constants {
     /**
      * Anchura de la pantalla
-     * @param WIDTH
      */
     public static int WIDTH = 1920;
     /**
      * Altura de la pantalla
-     * @param HEIGHT
      */
     public static int HEIGHT = 1080;
     /**
      * Aceleracion del jugador
-     * @param acc
      */
     public static final double acc = 0.08;
     /**
      * Cadencia de disparo
-     * @param FIRE_RATE
      */
     public static final int FIRE_RATE = 200;
     /**
      * Velocidad de los disparos
-     * @param LASER_VELOCITY
      */
     public static final int LASER_VELOCITY = 10;
     /**
      * Velocidad de los enemigos
-     * @param ENEMIES_VELOCITY
      */
     public static final double ENEMIES_VELOCITY = 1.5;
-    public static final int NODE_RADIUS = 160;
-    /**
-     * Masa de los enemigos de clase ruler
-     */
-    public static final int RULER_MASS = 60;
     /**
      * Velocidad maxima de los enemigos de clase ruler
      */
