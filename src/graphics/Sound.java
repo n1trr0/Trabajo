@@ -3,6 +3,10 @@ package graphics;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 
+/**
+ * Implementa los sonidos en el juego
+ * @author Raul Garcia & Alejandro Molero
+ */
 public class Sound {
     /**
      * Almacena el sonido

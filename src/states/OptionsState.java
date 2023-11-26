@@ -8,10 +8,24 @@ import graphics.assets;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
+/**
+ * Representa el estado del juego correspondiente a la pantalla de opciones.
+ * Permite al usuario ajustar diferentes configuraciones del juego.
+ * @author Raul Garcia & Alejandro Molero
+ */
 public class OptionsState extends State{
+    /**
+     * Lista que contiene los botones disponibles en la pantalla de opciones.
+     */
     private ArrayList<Button> buttons;
+    /**
+     * Imagen de fondo de la pantalla de opciones.
+     */
     private BufferedImage backgroundImage;
+
+    /**
+     * Constructor de la clase OptionsState. Inicializa los botones y la imagen de fondo.
+     */
     public OptionsState(){
         buttons = new ArrayList<Button>();
 
@@ -30,6 +44,10 @@ public class OptionsState extends State{
         ));
         backgroundImage = assets.menuBackground;
     }
+
+    /**
+     * Actualiza la lógica del estado de la pantalla de opciones.
+     */
     @Override
     public void update() {
         for(Button b:buttons){
@@ -37,6 +55,11 @@ public class OptionsState extends State{
         }
     }
 
+    /**
+     * Dibuja el estado actual de la pantalla de opciones en el lienzo proporcionado.
+     *
+     * @param graphics El contexto gráfico en el que se realizará el dibujo.
+     */
     @Override
     public void draw(Graphics graphics) {
         Graphics2D graphics2D = (Graphics2D) graphics;
@@ -50,3 +73,4 @@ public class OptionsState extends State{
         graphics2D.dispose();
     }
 }
+

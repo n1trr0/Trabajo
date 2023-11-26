@@ -8,12 +8,31 @@ import graphics.assets;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
+/**
+ * Representa el estado del juego correspondiente al menú principal.
+ * Permite al usuario acceder a diferentes opciones, como jugar, ajustar opciones, ver puntajes o salir del juego.
+ * @author Raul Garcia & Alejandro Molero
+ */
 public class MenuState extends State{
+    /**
+     * Lista que contiene los botones disponibles en el menú.
+     */
     private ArrayList<Button> buttons;
+    /**
+     * Objeto para gestionar el sonido de fondo del menú.
+     */
     private Sound backgroundMusic;
+    /**
+     * Imagen de fondo del menú.
+     */
     private BufferedImage backgroundImage;
+    /**
+     * Imagen del título del juego.
+     */
     private BufferedImage titleImage;
+    /**
+     * Constructor de la clase MenuState. Inicializa los botones del menú, la música de fondo y las imágenes.
+     */
     public MenuState(){
         buttons = new ArrayList<Button>();
 
@@ -63,13 +82,21 @@ public class MenuState extends State{
         backgroundImage = assets.menuBackground;
         titleImage = assets.titleImage;
     }
+
+    /**
+     * Actualiza la lógica del estado del menú.
+     */
     @Override
     public void update() {
         for(Button b:buttons){
             b.update();
         }
     }
-
+    /**
+     * Dibuja el estado actual del menú en el lienzo proporcionado.
+     *
+     * @param graphics El contexto gráfico en el que se realizará el dibujo.
+     */
     @Override
     public void draw(Graphics graphics) {
         Graphics2D graphics2D = (Graphics2D) graphics;

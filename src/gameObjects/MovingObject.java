@@ -103,16 +103,15 @@ public abstract class MovingObject extends GameObject{
         if(b instanceof Player && ((Player)b).isSpawing()){
             return;
         }
-        if((a instanceof Laser) && (b instanceof Laser)){
+        if(((a instanceof Laser) && (b instanceof Laser))||((a instanceof LaserEnemy) && (b instanceof LaserEnemy))){
             return;
         }
         if((a instanceof Player || b instanceof Player)&&(a instanceof Laser || b instanceof Laser)){
             return;
         }
-        /*if((a instanceof Enemies || a instanceof Ruler || b instanceof Enemies || b instanceof Ruler)
-                &&(a instanceof LaserEnemy || b instanceof LaserEnemy)){
+        if((a instanceof Enemies || b instanceof Enemies)&&(a instanceof Ruler || b instanceof Ruler)){
             return;
-        }*/
+        }
         if(!(a instanceof Enemies && b instanceof Enemies)){
             a.destroy();
             b.destroy();

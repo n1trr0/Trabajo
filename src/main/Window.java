@@ -16,19 +16,71 @@ import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
+/**
+ * Representa la ventana en la que corre el programa
+ * @author Raul Garcia & Alejandro Molero
+ */
+
 public class Window extends JFrame implements Runnable {
+
+    /**
+     * El componente de lienzo donde se dibujará el juego.
+     */
     private Canvas canvas;
+
+    /**
+     * Hilo de ejecución del juego.
+     */
     private Thread thread;
+
+    /**
+     * Indica si el juego está en ejecución.
+     */
     private boolean running = false;
+
+    /**
+     * Estrategia de búfer para gestionar el doble búfer.
+     */
     private BufferStrategy bufferStrategy;
+
+    /**
+     * Objeto para realizar operaciones gráficas en el lienzo.
+     */
     private Graphics graphics;
-    private final int FPS = 60;                                    //Frames per second
+
+    /**
+     * Número de fotogramas por segundo objetivo del juego.
+     */
+    private final int FPS = 60; //Frames per second
+
+    /**
+     * Tiempo objetivo por fotograma en nanosegundos.
+     */
     private double targetTime = 1000000000 / FPS;                     //Nanoseconds
+
+    /**
+     * Diferencia de tiempo entre fotogramas.
+     */
     private double delta = 0;
+
+    /**
+     * Fotogramas por segundo promedio.
+     */
     private int averageFPS = FPS;
+
+    /**
+     * Objeto para gestionar la entrada del teclado.
+     */
     private Keyboard keyboard;
+
+    /**
+     * Objeto para gestionar la entrada del mouse.
+     */
     private Mouse mouse;
 
+    /**
+     * Constructor de la clase window
+     */
     public Window() {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
@@ -62,11 +114,18 @@ public class Window extends JFrame implements Runnable {
         new Window().start();
     }
 
+    /**
+     * Actualiza la lógica del juego y el estado del teclado.
+     */
     private void update() {
         keyboard.update();
         State.getCurrentState().update();
     }
 
+
+    /**
+     * Dibuja el contenido del juego en el lienzo.
+     */
     private void draw() {
         bufferStrategy = canvas.getBufferStrategy();                //It will be null since bufferStrategy has not been created
 
@@ -102,6 +161,10 @@ public class Window extends JFrame implements Runnable {
         State.changeState(new LoadingState(loadingThread));
     }
 
+
+    /**
+     * Método principal que ejecuta el bucle del juego.
+     */
     @Override
     public void run() {                                              //For class "window" to be runnable must implement void run()
         long now = 0;
@@ -133,12 +196,18 @@ public class Window extends JFrame implements Runnable {
         stop();
     }
 
+    /**
+     * Inicia el hilo del juego.
+     */
     private void start() {                                           //Start thread
         thread = new Thread(this);                             //"this" refers to a class to implements runnable in this case "window"
         thread.start();
         running = true;
     }
 
+    /**
+     * Detiene el hilo del juego.
+     */
     private void stop() {                                            //Stop thread
         try {
             thread.join();

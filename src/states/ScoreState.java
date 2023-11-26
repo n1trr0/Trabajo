@@ -17,16 +17,40 @@ import io.JsonParser;
 import io.ScoreData;
 import UI.Button;
 import math.Vector2D;
-
-
+/**
+ * Representa el estado del juego correspondiente a la pantalla de puntajes.
+ * Muestra los puntajes más altos obtenidos por los jugadores.
+ * @author Raul Garcia & Alejandro Molero
+ */
 public class ScoreState extends State {
-
+    /**
+     * Botón para regresar al menú principal.
+     */
     private Button returnButton;
+    /**
+     * Cola de prioridad que almacena los datos de puntajes, ordenados por puntaje.
+     */
     private PriorityQueue<ScoreData> highScores;
+    /**
+     * Comparador para ordenar los puntajes de manera ascendente.
+     */
     private Comparator<ScoreData>scoreComparator;
+    /**
+     * Arreglo auxiliar para almacenar y ordenar los puntajes.
+     */
     private ScoreData[]auxArray;
+    /**
+     * Imagen de fondo de la pantalla de puntajes.
+     */
     private BufferedImage backgroundImage;
+    /**
+     * Imagen del encabezado del puntaje.
+     * Imagen del encabezado de la fecha.
+     */
     private BufferedImage scoreImage, dateImage;
+    /**
+     * Constructor de la clase ScoreState. Inicializa los elementos necesarios para mostrar los puntajes.
+     */
     public ScoreState(){
         returnButton=new Button(
                 assets.volverOut,
@@ -63,11 +87,20 @@ public class ScoreState extends State {
         scoreImage = assets.score;
         dateImage = assets.date;
     }
+
+    /**
+     * Actualiza la lógica del estado de la pantalla de puntajes.
+     */
     @Override
     public void update() {
         returnButton.update();
     }
 
+    /**
+     * Dibuja el estado actual de la pantalla de puntajes en el lienzo proporcionado.
+     *
+     * @param graphics El contexto gráfico en el que se realizará el dibujo.
+     */
     @Override
     public void draw(Graphics graphics) {
         Graphics2D graphics2D = (Graphics2D) graphics;
