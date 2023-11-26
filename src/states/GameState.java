@@ -3,6 +3,7 @@ package states;
 import UI.Action;
 import UI.Button;
 import gameObjects.*;
+import graphics.Sound;
 import graphics.Text;
 import graphics.assets;
 import input.Keyboard;
@@ -10,6 +11,7 @@ import io.JsonParser;
 import io.ScoreData;
 import math.Vector2D;
 
+import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
@@ -32,6 +34,7 @@ public class GameState extends State{
     private BufferedImage backgroundImage;
     private Button returnButton;
     private Chronometer flickertime;
+    private Sound gameMusic;
     private boolean visible;
     public GameState() {
         player = new Player(PLAYER_START_POSITION, new Vector2D(), 5, assets.player, this);
@@ -39,6 +42,8 @@ public class GameState extends State{
         movingObjects.add(player);
         enemies = 1;
         backgroundImage = assets.gameBackground;
+        gameMusic = new Sound(assets.gameMusic);
+        gameMusic.loopInicio();
 
         rulerSpawner = new Chronometer();
         waveSpawner = new Chronometer();

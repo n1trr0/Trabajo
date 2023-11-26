@@ -22,7 +22,7 @@ public class assets {
     /**
      * Numero maximo de carga de objetos
      */
-    public static float maxCount = 43;
+    public static float maxCount = 44;
     /**
      * Imagen del jugador
      */
@@ -114,6 +114,10 @@ public class assets {
      */
     public static Clip menuMusic;
     /**
+     * Musica de fondo del juego
+     */
+    public static Clip gameMusic;
+    /**
      * Imagen de fondo del menu
      */
     public static BufferedImage menuBackground;
@@ -168,6 +172,7 @@ public class assets {
             numbers[i] = loadImage("/hud/"+i+".png");
 
         menuMusic = loadSound("/sound/menuMusic.wav");
+        gameMusic = loadSound("/sound/gameMusic.wav");
 
         fontWave = loadFont("/fonts/TrajanProBold.ttf",42);
         fontMed = loadFont("/fonts/TrajanProBold.ttf",20);

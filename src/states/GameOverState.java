@@ -3,6 +3,7 @@ package states;
 import UI.Action;
 import UI.Button;
 import gameObjects.Constants;
+import graphics.Sound;
 import graphics.Text;
 import graphics.assets;
 import math.Vector2D;
@@ -29,6 +30,10 @@ public class GameOverState extends State{
      */
     int score;
     /**
+     * Musica de fondo
+     */
+    private Sound gameMusic;
+    /**
      * Constructor por defecto que añade un boton para volver y la puntuacion obtenida
      * @param lastScore Puntuacion del jugador tras la partida
      */
@@ -44,12 +49,14 @@ public class GameOverState extends State{
                 new Action(){
                     @Override
                     public void doAction() {
+                        gameMusic.stop();
                         State.changeState(new MenuState());
                     }
                 }
         ));
         score = lastScore;
         backgroundImage = assets.menuBackground;
+        gameMusic = new Sound(assets.gameMusic);
     }
 
     /**
