@@ -22,7 +22,7 @@ public class assets {
     /**
      * Numero maximo de carga de objetos
      */
-    public static float maxCount = 42;
+    public static float maxCount = 43;
     /**
      * Imagen del jugador
      */
@@ -98,6 +98,10 @@ public class assets {
      */
     public static BufferedImage date;
     /**
+     * Imagen de la pausa
+     */
+    public static BufferedImage pause;
+    /**
      * Fuente de que aparece al principio de cada oleada
      */
     public static Font fontWave;
@@ -144,6 +148,7 @@ public class assets {
         score = loadImage("/ui/score.png");
         date = loadImage("/ui/date.png");
         titleImage = loadImage("/ui/UntilDawn.png");
+        pause = loadImage("/ui/pause.png");
 
         menuBackground = loadImage("/menuBkg/menuBackground0.png");
         gameBackground = loadImage("/bkg.png");

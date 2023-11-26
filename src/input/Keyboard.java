@@ -62,12 +62,8 @@ public class Keyboard implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             if (!keys[e.getKeyCode()]) {
                 keys[e.getKeyCode()] = true;
-                // Realiza acciones específicas cuando se presiona la tecla Escape
-                System.out.println("Tecla Escape presionada");
             } else {
                 keys[e.getKeyCode()] = false;
-                // Realiza acciones específicas cuando se libera la tecla Escape
-                System.out.println("Tecla Escape liberada");
             }
         }
         else{

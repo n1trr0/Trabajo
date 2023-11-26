@@ -31,6 +31,8 @@ public class GameState extends State{
     private boolean gameOver;
     private BufferedImage backgroundImage;
     private Button returnButton;
+    private Chronometer flickertime;
+    private boolean visible;
     public GameState() {
         player = new Player(PLAYER_START_POSITION, new Vector2D(), 5, assets.player, this);
         gameOver = false;
@@ -40,6 +42,7 @@ public class GameState extends State{
 
         rulerSpawner = new Chronometer();
         waveSpawner = new Chronometer();
+        flickertime = new Chronometer();
         rulerSpawner.run(Constants.RULER_SPAWN_RATE);
         waveSpawner.run(Constants.WAVE_SPAWN_RATE);
 
@@ -152,6 +155,7 @@ public class GameState extends State{
 
     public void update() {
         if(!Keyboard.PAUSE){
+            visible=true;
             for (int i = 0; i < movingObjects.size(); i++) {
                 MovingObject mo = movingObjects.get(i);
                 mo.update();
@@ -187,9 +191,13 @@ public class GameState extends State{
                     return;
         }
         else{
+                if(!flickertime.isRunning()){
+                    flickertime.run(1000);
+                    visible=!visible;
+                }
             returnButton.update();
         }
-
+        flickertime.update();
         }
 
 
@@ -211,6 +219,9 @@ public class GameState extends State{
 
         if(Keyboard.PAUSE){
             returnButton.draw(graphics);
+            if(visible){
+                graphics.drawImage(assets.pause, (Constants.WIDTH- assets.pause.getWidth())/2,(Constants.HEIGHT- assets.pause.getHeight())/2,null);
+            }
         }
 
         graphics2D.dispose();
