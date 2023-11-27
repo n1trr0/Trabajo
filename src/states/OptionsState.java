@@ -3,6 +3,7 @@ package states;
 import UI.Action;
 import UI.Button;
 import gameObjects.Constants;
+import graphics.Sound;
 import graphics.assets;
 
 import java.awt.*;
@@ -42,6 +43,40 @@ public class OptionsState extends State{
                     }
                 }
         ));
+
+        buttons.add(new Button(
+                assets.siOut,
+                assets.siIn,
+                ((Constants.WIDTH- assets.silenciarImage.getWidth())/3)*2,
+                155,
+                Constants.PLAY,
+                new Action(){
+                    @Override
+                    public void doAction() {
+                         Sound menuMusic = new Sound(assets.menuMusic);
+                         menuMusic.mute();
+                         Sound gameMusic = new Sound(assets.gameMusic);
+                         gameMusic.mute();
+                    }
+                }
+        ));
+
+        buttons.add(new Button(
+                assets.noOut,
+                assets.noIn,
+                (int) ((((Constants.WIDTH- assets.silenciarImage.getWidth())/3)*2)+((assets.noOut.getWidth())*1.5)),
+                155,
+                Constants.PLAY,
+                new Action(){
+                    @Override
+                    public void doAction() {
+                        Sound menuMusic = new Sound(assets.menuMusic);
+                        menuMusic.changeVolume(0);
+                        Sound gameMusic = new Sound(assets.gameMusic);
+                        gameMusic.changeVolume(0);
+                    }
+                }
+        ));
         backgroundImage = assets.menuBackground;
     }
 
@@ -66,6 +101,9 @@ public class OptionsState extends State{
         graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 
         graphics2D.drawImage(backgroundImage, 0, 0, Constants.WIDTH, Constants.HEIGHT, null);
+
+        graphics2D.drawImage(assets.musicImage, (Constants.WIDTH- assets.musicImage.getWidth())/2,75, null);
+        graphics2D.drawImage(assets.silenciarImage, (Constants.WIDTH- assets.silenciarImage.getWidth())/3,150, null);
 
         for(Button b:buttons){
             b.draw(graphics);

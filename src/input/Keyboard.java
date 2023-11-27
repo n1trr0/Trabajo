@@ -45,6 +45,9 @@ public class Keyboard implements KeyListener {
         SHOOT = keys[KeyEvent.VK_SPACE];
         PAUSE = keys[KeyEvent.VK_ESCAPE];
     }
+    public void setPAUSE(boolean option){
+        PAUSE = option;
+    }
 
     /**
      * Se debe implementar pero no se usa
@@ -83,4 +86,5 @@ public class Keyboard implements KeyListener {
         }
 
     }
+
 }

@@ -11,7 +11,6 @@ import graphics.loader;
 import states.LoadingState;
 import states.MenuState;
 import states.State;
-
 import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.image.BufferStrategy;

@@ -64,4 +64,7 @@ public class Sound {
     public void changeVolume(float value){
         volume.setValue(value);
     }
+    public void mute(){
+        volume.setValue(volume.getMinimum());
+    }
 }

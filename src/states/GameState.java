@@ -116,6 +116,7 @@ public class GameState extends State{
                 new Action(){
                     @Override
                     public void doAction() {
+                        gameMusic.stop();
                         State.changeState(new MenuState());
                     }
                 }

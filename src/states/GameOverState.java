@@ -79,6 +79,9 @@ public class GameOverState extends State{
 
         graphics2D.drawImage(backgroundImage, 0, 0, Constants.WIDTH, Constants.HEIGHT, null);
 
+        int anchoTextoGameOver = graphics.getFontMetrics(assets.fontGameOver).stringWidth("GAME OVER");
+        Text.drawText(graphics,"GAME OVER", new Vector2D((Constants.WIDTH - anchoTextoGameOver)/2, Constants.HEIGHT/3), false, Color.WHITE, assets.fontGameOver);
+
         int anchoTexto = graphics.getFontMetrics(assets.fontWave).stringWidth("Puntuacion: " + Integer.toString(score));
         Text.drawText(graphics,"Puntuacion: " + Integer.toString(score), new Vector2D((Constants.WIDTH - anchoTexto)/2, (Constants.HEIGHT/3)*2), false, Color.WHITE, assets.fontWave);
         for(Button b:buttons){

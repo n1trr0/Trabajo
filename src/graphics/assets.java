@@ -22,7 +22,7 @@ public class assets {
     /**
      * Numero maximo de carga de objetos
      */
-    public static float maxCount = 44;
+    public static float maxCount = 51;
     /**
      * Imagen del jugador
      */
@@ -35,8 +35,13 @@ public class assets {
      * Imagen de los disparos enemigos
      */
     public static BufferedImage fireballToxic;
+    /**
+     * Numeros usados en la interfaz de la partida
+     */
     public static BufferedImage[] numbers = new BufferedImage[11];
-    //enemies
+    /**
+     * Diferentes tamaños de los enemigos
+     */
     public static BufferedImage[] bigs = new BufferedImage[2];
     public static BufferedImage[] meds = new BufferedImage[2];
     public static BufferedImage[] smalls = new BufferedImage[2];
@@ -102,6 +107,14 @@ public class assets {
      */
     public static BufferedImage pause;
     /**
+     * Imagen del boton no cuando el raton esta encima
+     */
+    public static BufferedImage noIn;
+    /**
+     * Imagen del boton no por defecto
+     */
+    public static BufferedImage noOut;
+    /**
      * Fuente de que aparece al principio de cada oleada
      */
     public static Font fontWave;
@@ -109,6 +122,10 @@ public class assets {
      * Fuente estandar del juego
      */
     public static Font fontMed;
+    /**
+     * Fuente del game over
+     */
+    public static Font fontGameOver;
     /**
      * Musica de fondo del menu
      */
@@ -129,6 +146,22 @@ public class assets {
      * Imagen del nombre del menu principal
      */
     public static BufferedImage titleImage;
+    /**
+     * Imagen de la musica
+     */
+    public static BufferedImage musicImage;
+    /**
+     * Imagen de silenciar
+     */
+    public static BufferedImage silenciarImage;
+    /**
+     * Imagen del boton si por defecto
+     */
+    public static BufferedImage siOut;
+    /**
+     * Imagen del boton si cuando el raton esta por encima
+     */
+    public static BufferedImage siIn;
     /**
      * Carga las imagenes/fuentes/sonidos/animaciones desde el directorio indicado
      */
@@ -153,6 +186,12 @@ public class assets {
         date = loadImage("/ui/date.png");
         titleImage = loadImage("/ui/UntilDawn.png");
         pause = loadImage("/ui/pause.png");
+        musicImage = loadImage("/ui/musica.png");
+        silenciarImage = loadImage("/ui/silenciar.png");
+        siIn = loadImage("/ui/siIn.png");
+        siOut = loadImage(("/ui/siOut.png"));
+        noIn = loadImage("/ui/noIn.png");
+        noOut = loadImage(("/ui/noOut.png"));
 
         menuBackground = loadImage("/menuBkg/menuBackground0.png");
         gameBackground = loadImage("/bkg.png");
@@ -176,6 +215,7 @@ public class assets {
 
         fontWave = loadFont("/fonts/TrajanProBold.ttf",42);
         fontMed = loadFont("/fonts/TrajanProBold.ttf",20);
+        fontGameOver = loadFont("/fonts/TrajanProBold.ttf",128);
 
         loaded = true;
     }
