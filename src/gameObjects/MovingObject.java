@@ -97,22 +97,33 @@ public abstract class MovingObject extends GameObject{
      * @param b Segundo objecto
      */
     private void objectCollision(MovingObject a, MovingObject b){
-        if(a instanceof Player && ((Player)a).isSpawing()){
+        Player player = null;
+
+        if(a instanceof Player)
+            player = (Player)a;
+        else if(b instanceof Player)
+            player = (Player)b;
+
+        if(player != null && player.isSpawing())
+            return;
+
+        if((a instanceof Laser) && (b instanceof Laser)){
             return;
         }
-        if(b instanceof Player && ((Player)b).isSpawing()){
+        /*if((a instanceof Player || b instanceof Player)&&(a instanceof Laser || b instanceof Laser)){
             return;
-        }
-        if(((a instanceof Laser) && (b instanceof Laser))||((a instanceof LaserEnemy) && (b instanceof LaserEnemy))){
-            return;
-        }
-        if((a instanceof Player || b instanceof Player)&&(a instanceof Laser || b instanceof Laser)){
-            return;
-        }
+        }*/
         if((a instanceof Enemies || b instanceof Enemies)&&(a instanceof Ruler || b instanceof Ruler)){
             return;
         }
-        if(!(a instanceof Enemies && b instanceof Enemies)){
+        if(player == null){
+            a.destroy();
+            b.destroy();
+        }
+        if(player != null){
+            if(a instanceof Laser || b instanceof Laser){
+                return;
+            }
             a.destroy();
             b.destroy();
         }
