@@ -269,9 +269,9 @@ public class GameState extends State{
             rulerSpawner.update();
             waveSpawner.update();
 
-            for (int i = 0; i < movingObjects.size(); i++)
+            /*for (int i = 0; i < movingObjects.size(); i++)
                 if (movingObjects.get(i) instanceof Enemies)
-                    return;
+                    return;*/
         }
         else{
             if(!flickertime.isRunning()){
