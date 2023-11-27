@@ -110,9 +110,6 @@ public abstract class MovingObject extends GameObject{
         if((a instanceof Laser) && (b instanceof Laser)){
             return;
         }
-        /*if((a instanceof Player || b instanceof Player)&&(a instanceof Laser || b instanceof Laser)){
-            return;
-        }*/
         if((a instanceof Enemies || b instanceof Enemies)&&(a instanceof Ruler || b instanceof Ruler)){
             return;
         }
